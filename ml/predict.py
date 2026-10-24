@@ -1,10 +1,20 @@
-"""ML entry point -- owner: ML teammate.
-Implement predict(text) and return a dict matching the API contract (without "id"):
-{"label": "REAL|FAKE|UNCERTAIN", "confidence": float,
- "models": [{"name", "label", "confidence"}],
- "words": [{"word", "score"}], "shap": [{"feature", "value"}]}
-Then call it from backend/app/routers/analysis.py -> run_model()."""
+"""FactLens ML entry point (imported by the backend).
+
+`predict(text)` returns the analysis payload described in the project README.
+"""
+from __future__ import annotations
+
+from .factlens_ml.registry import get_registry, predict
+
+__all__ = ["predict", "warmup"]
 
 
-def predict(text: str) -> dict:
-    raise NotImplementedError("TODO: implement real model")
+def warmup() -> dict:
+    """Load every artifact now instead of on the first request."""
+    registry = get_registry()
+    registry.load()
+    return {
+        "models_loaded": registry.available_models,
+        "load_seconds": getattr(registry, "load_seconds", None),
+        "error": registry._load_error,
+    }
