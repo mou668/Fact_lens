@@ -1,0 +1,13 @@
+# ML runtime for the backend image (Linux). Installed on top of requirements.txt
+# so /api/analyze can load the trained artifacts instead of the fallback.
+#
+# CPU-only torch keeps the image ~600 MB smaller than the CUDA build.
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+numpy>=1.26,<3
+pandas>=2.1,<3
+scikit-learn>=1.4,<2
+xgboost>=2.0,<3
+joblib>=1.3,<2
+torch>=2.2,<3
+transformers>=4.40,<5

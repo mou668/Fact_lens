@@ -4,3 +4,9 @@ __pycache__/
 dist/
 backend/*.db
 backend/*.db-*
+
+# ML data and trained artifacts are large; only metrics.json is committed.
+ml/data/
+ml/artifacts/
+*.joblib
+*.pt
