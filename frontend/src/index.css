@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .card { @apply rounded-xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900; }
+  .input { @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2 outline-none focus:border-primary focus:ring-2 focus:ring-primary/30 dark:border-slate-700 dark:bg-slate-800; }
+  .btn-primary { @apply inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2 font-medium text-white hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 disabled:opacity-60; }
+  .badge-REAL { @apply bg-real/15 text-real; }
+  .badge-FAKE { @apply bg-fake/15 text-fake; }
+  .badge-UNCERTAIN { @apply bg-uncertain/15 text-uncertain; }
+}
