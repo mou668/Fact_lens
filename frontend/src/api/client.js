@@ -51,9 +51,10 @@ export const api = {
   login: (email, password) => request("/api/auth/login", { method: "POST", body: { email, password }, auth: false }),
   logout: () => request("/api/auth/logout", { method: "POST" }),
   me: () => request("/api/auth/me"),
-  // Analysis (stubbed on the backend -- TODO real ML)
+  // Analysis (real ML pipeline in ml/)
   analyze: (text) => request("/api/analyze", { method: "POST", body: { text } }),
   getResult: (id) => request(`/api/result/${id}`),
   getHistory: () => request("/api/history"),
+  getModels: () => request("/api/models"),
   sendFeedback: (analysis_id, correct, comment) => request("/api/feedback", { method: "POST", body: { analysis_id, correct, comment } }),
 };

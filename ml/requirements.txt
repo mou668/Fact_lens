@@ -1,0 +1,12 @@
+# Runtime deps for the FactLens ML pipeline (Python 3.10+).
+# `backend/requirements-ml.txt` mirrors the inference subset for the Docker
+# image; training/inference run from the repo root with `ml` importable.
+numpy>=1.24,<3
+pandas>=2.0,<3
+scikit-learn>=1.3,<2
+xgboost>=2.0,<3
+joblib>=1.3,<2
+torch>=2.1,<3
+transformers>=4.36,<5
+# Only needed if you want to cross-check the analytic SHAP values:
+# shap>=0.44

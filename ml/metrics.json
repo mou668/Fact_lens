@@ -1,0 +1,303 @@
+{
+  "generated_at": "2026-10-24T19:20:30.432548+00:00",
+  "dataset": {
+    "name": "ISOT Fake News (Kaggle: fake-and-real-news-dataset)",
+    "raw_rows": 44898,
+    "clean_rows": 38224,
+    "dropped_short_or_duplicate": 6674,
+    "class_counts": {
+      "REAL": 21170,
+      "FAKE": 17054
+    },
+    "split": {
+      "train": 30579,
+      "val": 3822,
+      "test": 3823
+    },
+    "deduplicated": true,
+    "reuters_datelines_stripped": true
+  },
+  "models": {
+    "Logistic Regression": {
+      "info": {
+        "train_seconds": 4.4
+      },
+      "params": {
+        "C": 4.0,
+        "max_iter": 2000,
+        "solver": "liblinear",
+        "random_state": 42
+      },
+      "val": {
+        "accuracy": 0.9927,
+        "precision": 0.9929,
+        "recall": 0.9906,
+        "f1": 0.9918,
+        "confusion_matrix": {
+          "tn": 2105,
+          "fp": 12,
+          "fn": 16,
+          "tp": 1689
+        },
+        "support": 3822,
+        "roc_auc": 0.9998
+      },
+      "test": {
+        "accuracy": 0.9914,
+        "precision": 0.9929,
+        "recall": 0.9877,
+        "f1": 0.9903,
+        "confusion_matrix": {
+          "tn": 2105,
+          "fp": 12,
+          "fn": 21,
+          "tp": 1685
+        },
+        "support": 3823,
+        "roc_auc": 0.999
+      }
+    },
+    "SVM": {
+      "info": {
+        "train_seconds": 6.4,
+        "calibration_folds": 3
+      },
+      "params": {
+        "C": 0.5,
+        "dual": "auto",
+        "max_iter": 5000,
+        "random_state": 42
+      },
+      "val": {
+        "accuracy": 0.9961,
+        "precision": 0.9936,
+        "recall": 0.9977,
+        "f1": 0.9956,
+        "confusion_matrix": {
+          "tn": 2106,
+          "fp": 11,
+          "fn": 4,
+          "tp": 1701
+        },
+        "support": 3822,
+        "roc_auc": 0.9999
+      },
+      "test": {
+        "accuracy": 0.9942,
+        "precision": 0.9936,
+        "recall": 0.9936,
+        "f1": 0.9936,
+        "confusion_matrix": {
+          "tn": 2106,
+          "fp": 11,
+          "fn": 11,
+          "tp": 1695
+        },
+        "support": 3823,
+        "roc_auc": 0.9992
+      }
+    },
+    "XGBoost": {
+      "info": {
+        "train_seconds": 234.7,
+        "features_used": 30000,
+        "features_total": 75012
+      },
+      "params": {
+        "n_estimators": 450,
+        "max_depth": 6,
+        "learning_rate": 0.12,
+        "subsample": 0.9,
+        "colsample_bytree": 0.6,
+        "min_child_weight": 2,
+        "tree_method": "hist",
+        "eval_metric": "logloss",
+        "n_jobs": -1,
+        "random_state": 42
+      },
+      "val": {
+        "accuracy": 0.9958,
+        "precision": 0.9959,
+        "recall": 0.9947,
+        "f1": 0.9953,
+        "confusion_matrix": {
+          "tn": 2110,
+          "fp": 7,
+          "fn": 9,
+          "tp": 1696
+        },
+        "support": 3822,
+        "roc_auc": 0.9999
+      },
+      "test": {
+        "accuracy": 0.9958,
+        "precision": 0.9959,
+        "recall": 0.9947,
+        "f1": 0.9953,
+        "confusion_matrix": {
+          "tn": 2110,
+          "fp": 7,
+          "fn": 9,
+          "tp": 1697
+        },
+        "support": 3823,
+        "roc_auc": 0.9998
+      }
+    },
+    "LSTM": {
+      "info": {
+        "epochs": 2,
+        "vocab_size": 40000,
+        "max_len": 200,
+        "train_samples": 18000,
+        "history": [
+          {
+            "epoch": 1,
+            "train_loss": 0.2291,
+            "val_accuracy": 0.959
+          },
+          {
+            "epoch": 2,
+            "train_loss": 0.091,
+            "val_accuracy": 0.9677
+          }
+        ],
+        "device": "cpu"
+      },
+      "params": {
+        "max_len": 200,
+        "max_vocab": 40000,
+        "min_freq": 2,
+        "embed_dim": 128,
+        "hidden_dim": 128,
+        "dropout": 0.35,
+        "batch_size": 64,
+        "epochs": 2,
+        "lr": 0.001,
+        "max_train_samples": 18000,
+        "max_eval_samples": 3000
+      },
+      "val": {
+        "accuracy": 0.9687,
+        "precision": 0.9533,
+        "recall": 0.9775,
+        "f1": 0.9653,
+        "confusion_matrix": {
+          "tn": 800,
+          "fp": 32,
+          "fn": 15,
+          "tp": 653
+        },
+        "support": 1500,
+        "roc_auc": 0.9964
+      },
+      "test": {
+        "accuracy": 0.9673,
+        "precision": 0.9679,
+        "recall": 0.9609,
+        "f1": 0.9644,
+        "confusion_matrix": {
+          "tn": 788,
+          "fp": 22,
+          "fn": 27,
+          "tp": 663
+        },
+        "support": 1500,
+        "roc_auc": 0.9937
+      }
+    },
+    "BERT": {
+      "info": {
+        "checkpoint": "distilbert-base-uncased",
+        "epochs_completed": 1,
+        "max_len": 160,
+        "batch_size": 16,
+        "train_samples": 6000,
+        "val_samples": 1500,
+        "stopped_early": false,
+        "train_minutes": 29.0,
+        "device": "cpu",
+        "history": [
+          {
+            "epoch": 1,
+            "val_accuracy": 0.992,
+            "stopped_early": false
+          }
+        ]
+      },
+      "params": {
+        "checkpoint": "distilbert-base-uncased",
+        "max_len": 160,
+        "batch_size": 16,
+        "epochs": 1,
+        "lr": 2e-05,
+        "max_train_samples": 6000,
+        "max_eval_samples": 1500,
+        "weight_decay": 0.01
+      },
+      "val": {
+        "accuracy": 0.992,
+        "precision": 0.9985,
+        "recall": 0.9835,
+        "f1": 0.991,
+        "confusion_matrix": {
+          "tn": 831,
+          "fp": 1,
+          "fn": 11,
+          "tp": 657
+        },
+        "support": 1500,
+        "roc_auc": 0.9997
+      },
+      "test": {
+        "accuracy": 0.9873,
+        "precision": 0.9941,
+        "recall": 0.9783,
+        "f1": 0.9861,
+        "confusion_matrix": {
+          "tn": 806,
+          "fp": 4,
+          "fn": 15,
+          "tp": 675
+        },
+        "support": 1500,
+        "roc_auc": 0.9975
+      }
+    }
+  },
+  "ensemble": {
+    "test_subset": 1500,
+    "coverage": 0.9593,
+    "accuracy_on_decided": 0.9993,
+    "uncertain": 61,
+    "false_positives": 0,
+    "false_negatives": 38,
+    "mean_confidence": 0.9797,
+    "vote_distribution": {
+      "FAKE": 652,
+      "REAL": 787,
+      "UNCERTAIN": 61
+    },
+    "majority_vote": {
+      "min_votes": 4,
+      "min_votes_relaxed": 3,
+      "relaxed_confidence": 0.75,
+      "max_confidence_spread": 0.55
+    }
+  },
+  "summary": {
+    "accuracy": 0.9872,
+    "precision": 0.9889,
+    "recall": 0.983,
+    "f1": 0.9859,
+    "roc_auc": 0.9978
+  },
+  "system": {
+    "python": "3.10.11",
+    "platform": "Windows-10-10.0.26300-SP0",
+    "cpu_count": 16,
+    "random_seed": 42,
+    "quick_mode": false,
+    "training_seconds": 2991.9
+  }
+}
