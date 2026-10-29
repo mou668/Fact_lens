@@ -1,0 +1,35 @@
+# Environment
+.env
+.env.local
+
+# Dependencies
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Build
+dist/
+build/
+
+# Database
+*.db
+*.db-*
+
+# ML artifacts
+ml/data/
+ml/artifacts/
+*.joblib
+*.pt
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
