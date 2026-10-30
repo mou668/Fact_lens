@@ -72,3 +72,22 @@ class FeedbackIn(BaseModel):
     analysis_id: int
     correct: bool
     comment: str | None = Field(default=None, max_length=1000)
+
+
+class SupportIn(BaseModel):
+    name: str = Field(min_length=2, max_length=100)
+    email: EmailStr
+    category: str = Field(default="general", max_length=40)
+    message: str = Field(min_length=5, max_length=4000)
+
+    @field_validator("message")
+    @classmethod
+    def message_not_blank(cls, v: str) -> str:
+        if not v.strip():
+            raise ValueError("Message must not be blank")
+        return v.strip()
+
+
+class HelpFeedbackIn(BaseModel):
+    item_id: str = Field(min_length=1, max_length=120)
+    helpful: bool

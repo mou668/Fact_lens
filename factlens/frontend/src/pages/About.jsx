@@ -8,6 +8,7 @@ import {
 import { api } from "../api/client.js";
 import { usePreferences } from "../context/PreferencesContext.jsx";
 
+const APP_VERSION = "0.1.0";
 
 const TECH_STACK = [
   { name: "FastAPI", icon: Zap, color: "text-green-600" },
@@ -74,7 +75,7 @@ export default function About() {
       {/* Problem */}
       <section className="card" aria-labelledby="problem-title">
         <h2 id="problem-title" className="mb-3 flex items-center gap-2 text-xl font-semibold">
-          <AlertIcon className="h-5 w-5 text-fake" aria-hidden="true" />
+          <AlertTriangle className="h-5 w-5 text-fake" aria-hidden="true" />
           {t("The problem")}
         </h2>
         <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
@@ -260,6 +261,3 @@ export default function About() {
     </section>
   );
 }
-
-// Need to import AlertTriangle
-const APP_VERSION = "0.1.0";

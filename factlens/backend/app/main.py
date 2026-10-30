@@ -6,7 +6,7 @@ from .config import settings
 from .database import Base, engine, SessionLocal
 from .models import User, Role
 from .security import hash_password
-from .routers import auth, analysis
+from .routers import auth, analysis, support
 
 app = FastAPI(title="FactLens API", version="0.1.0")
 app.add_middleware(CORSMiddleware, allow_origins=settings.CORS_ORIGINS.split(","),
@@ -39,3 +39,4 @@ def health():
 
 app.include_router(auth.router)
 app.include_router(analysis.router)
+app.include_router(support.router)

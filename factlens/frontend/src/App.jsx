@@ -16,14 +16,17 @@ export default function App() {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      {/* Public pages: no login required */}
+      <Route element={<Layout />}>
+        <Route path="/about" element={<About />} />
+        <Route path="/help" element={<Help />} />
+      </Route>
       <Route element={<ProtectedRoute><Layout /></ProtectedRoute>}>
         <Route path="/" element={<Navigate to="/analyze" replace />} />
         <Route path="/analyze" element={<Analyze />} />
         <Route path="/result/:id" element={<Result />} />
         <Route path="/history" element={<History />} />
         <Route path="/models" element={<Models />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/help" element={<Help />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

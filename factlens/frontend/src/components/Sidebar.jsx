@@ -55,21 +55,31 @@ export default function Sidebar({ open, onClose }) {
           </ul>
         </nav>
         <div className="relative border-t border-white/10 p-3" ref={menuRef}>
-          <button
-            onClick={() => setMenu((m) => !m)}
-            aria-haspopup="menu"
-            aria-expanded={menu}
-            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left hover:bg-navy-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-          >
-            <span className="grid h-8 w-8 place-items-center rounded-full bg-primary font-semibold text-white" aria-hidden="true">
-              {user?.name?.[0]?.toUpperCase()}
-            </span>
-            <span className="min-w-0 flex-1">
-              <span className="block truncate text-sm font-medium text-white">{user?.name}</span>
-              <span className="block truncate text-xs text-slate-400">{user?.email} · {user?.role}</span>
-            </span>
-            <ChevronUp className={`h-4 w-4 transition ${menu ? "" : "rotate-180"}`} aria-hidden="true" />
-          </button>
+          {user ? (
+            <button
+              onClick={() => setMenu((m) => !m)}
+              aria-haspopup="menu"
+              aria-expanded={menu}
+              className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left hover:bg-navy-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
+              <span className="grid h-8 w-8 place-items-center rounded-full bg-primary font-semibold text-white" aria-hidden="true">
+                {user?.name?.[0]?.toUpperCase()}
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="block truncate text-sm font-medium text-white">{user?.name}</span>
+                <span className="block truncate text-xs text-slate-400">{user?.email} · {user?.role}</span>
+              </span>
+              <ChevronUp className={`h-4 w-4 transition ${menu ? "" : "rotate-180"}`} aria-hidden="true" />
+            </button>
+          ) : (
+            <NavLink
+              to="/login"
+              onClick={onClose}
+              className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium hover:bg-navy-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
+              <LogOut className="h-4 w-4 rotate-180" aria-hidden="true" /> {t("Log in")}
+            </NavLink>
+          )}
           {menu && (
             <div role="menu" className="absolute bottom-full left-3 right-3 mb-2 rounded-lg bg-navy-light p-1 shadow-lg">
               <button role="menuitem" autoFocus onClick={() => logout()} className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm text-red-300 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">

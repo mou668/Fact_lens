@@ -5,7 +5,7 @@ import {
   CheckCircle2, AlertTriangle, Clock, Send, Mail, User, Tag,
   Lightbulb, Shield, Lock, Trash2, RefreshCw,
 } from "lucide-react";
-import { api } from "../api/client.js";
+import { API_URL, tokenStore } from "../api/client.js";
 import { usePreferences } from "../context/PreferencesContext.jsx";
 import HelpTooltip from "../components/HelpTooltip.jsx";
 import WasThisHelpful from "../components/WasThisHelpful.jsx";
@@ -90,8 +90,8 @@ export default function Help() {
     setSending(true);
     setContactStatus(null);
     try {
-      const token = localStorage.getItem("factlens_token");
-      const res = await fetch("http://localhost:8000/api/support", {
+      const token = tokenStore.get();
+      const res = await fetch(`${API_URL}/api/support`, {
         method: "POST",
         headers: { "Content-Type": "application/json", ...(token ? { Authorization: `Bearer ${token}` } : {}) },
         body: JSON.stringify(contactForm),
@@ -166,7 +166,14 @@ export default function Help() {
           </div>
           <div className="flex gap-3">
             <BarChart3 className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
-            <div><strong>{t("Confidence")}</strong>: {t("Confidence desc")}</div>
+            <div>
+              <strong>{t("Confidence")}</strong>
+              <HelpTooltip
+                text={t("How certain the model is, expressed as a percentage.")}
+                ariaLabel={t("What does confidence mean?")}
+              />
+              : {t("Confidence desc")}
+            </div>
           </div>
           <div className="flex gap-3">
             <Brain className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
@@ -182,7 +189,14 @@ export default function Help() {
           </div>
           <div className="flex gap-3">
             <BarChart3 className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
-            <div><strong>{t("SHAP chart")}</strong>: {t("SHAP desc help")}</div>
+            <div>
+              <strong>{t("SHAP chart")}</strong>
+              <HelpTooltip
+                text={t("SHapley Additive exPlanations — shows how much each word or feature pushed the prediction.")}
+                ariaLabel={t("What is SHAP?")}
+              />
+              : {t("SHAP desc help")}
+            </div>
           </div>
           <div className="flex gap-3">
             <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-uncertain" aria-hidden="true" />

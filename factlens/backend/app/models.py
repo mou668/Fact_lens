@@ -40,3 +40,23 @@ class Feedback(Base):
     correct: Mapped[bool] = mapped_column()
     comment: Mapped[str | None] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+
+
+class SupportMessage(Base):
+    """Contact form submissions from the Help page."""
+    __tablename__ = "support_messages"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str] = mapped_column(String(100))
+    email: Mapped[str] = mapped_column(String(255))
+    category: Mapped[str] = mapped_column(String(40), default="general")
+    message: Mapped[str] = mapped_column(Text)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+
+
+class HelpFeedback(Base):
+    """'Was this helpful?' votes on FAQ items."""
+    __tablename__ = "help_feedback"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    item_id: Mapped[str] = mapped_column(String(120), index=True)
+    helpful: Mapped[bool] = mapped_column()
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
